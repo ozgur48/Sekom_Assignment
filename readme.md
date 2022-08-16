@@ -6,6 +6,7 @@ Django ile İl , İlçe, Hava durumu modelleri ve redis, docker teknolojileri ku
 
 ## Kurulum
 Proje için docker teknolojisi kullanılmıştır. Bundan dolayı aşağıda belirtilen komutun projenin ana dizininde çalıştırılması sonucu websitesi çalışır hale gelecektir.
+Komutu kullanmadan önce ``.env.example`` dosyası kopyalanarak ``.env`` dosyası oluşturulmalı ve içeriğinde gerekli alanlar doldurulmalıdır.
 ```
 docker-compose up --build
 ```
