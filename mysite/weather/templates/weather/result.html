@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Weather APP</title>
+
+<style>
+    #provienceWeather { display: none; }
+  body {
+    background-color: #ebebeb;
+    color: #000;
+  }
+  .w-50{ width: 50%; }
+  .current-time { opacity: 0.5; }
+  .opacity-07{ opacity: .7; }
+  .flex {
+    display: flex;
+  }
+  .flex-column { flex-direction: column; }
+  .space-between {
+    justify-content: space-between;
+  }
+  .align-center { align-items: center; }
+  .degree { font-size: 24px; }
+  .C { font-size: 16px; opacity: 0.8; }
+  .f-xl { font-size: 18px; }
+  .f-l { font-size: 16px; }
+  .f-n { font-size: 14px; }
+  .mt-14{ margin-top: 14px; }
+  .ml-5{ margin-left: 5px; }
+  .py-10 { padding-top: 10px; padding-bottom: 10px;  }
+  .border-top { border-top: 1px solid rgba(0,0,0,.15); }
+  .gap { gap: 2rem; }
+  .bold { font-weight: bold; }
+  .bg-white { background: #fff; }
+  .rounded { border-radius: .5rem; }
+  .card-padding { padding: 0.5rem 1rem; }
+  h4{ margin-block-start: 0; margin-block-end: 0; }
+  .mt-1-5{ margin-top: 1.5rem; }
+
+</style>
+</head>
+<body>
+<h1>Provience: {{ provience.name }}</h1>
+
+{% if provience.weather is not None %}
+    <div class="flex flex-column bg-white rounded card-padding">
+        <div class="flex space-between py-10">
+            <h4>Current Weather</h4>
+        </div>
+        <div class="flex gap">
+            <div class="w-50">
+                <div class="flex align-center">
+                    <img width="64" height="64" src="{{ provience.weather.condition_icon }}"/>
+                    <span class="degree">{{ provience.weather.temp_c }}</span>
+                    <span class="C">C</span>
+                </div>
+                <span>{{provience.weather.condition_text}}</span>
+            </div>
+            <div class="w-50 flex flex-column">
+               <div class="flex flex-column">
+                    <div class="flex flex-column f-xl">
+                        <div>RealFeel</div>
+                        <span class="bold">{{provience.weather.feelslike_c}}C</span>
+                    </div>
+               </div>
+            </div>
+        </div>
+        <div class="flex gap mt-14">
+            <div class="w-50 flex flex-column">
+                <div class="flex space-between py-10">
+                    <span class="f-l">Wind KPH</span>
+                    <span class="f-xl bold">{{ provience.weather.wind_kph }}</span>
+                </div>
+                <div class="flex space-between py-10 border-top">
+                    <span class="f-l">Wind Dir</span>
+                    <span class="f-xl bold">{{provience.weather.wind_dir}}</span>
+                </div>
+            </div>
+            <div class="w-50">
+                <div class="flex space-between py-10">
+                    <span class="f-l">Humidity</span>
+                    <span class="f-xl bold">{{provience.weather.humidity}}%</span>
+                </div>
+            </div>
+        </div>
+    </div>
+{% else %}
+<h4>Provience is not found!</h4>
+{% endif %}
+{% if provience.town_set is not None %}
+     {% for town in provience.town_set.all %}
+         <div class="flex flex-column bg-white rounded card-padding mt-1-5">
+            <div class="flex space-between py-10">
+                <h4>{{town.name}}</h4>
+            </div>
+            <div class="flex gap">
+                <div class="w-50">
+                    <div class="flex align-center">
+                        <img width="64" height="64" src="{{ provience.weather.condition_icon }}"/>
+                        <span class="degree">{{ town.weather.temp_c }}</span>
+                        <span class="C">C</span>
+                    </div>
+                    <span>{{town.weather.condition_text}}</span>
+                </div>
+                <div class="w-50 flex flex-column">
+                   <div class="flex flex-column">
+                        <div class="flex flex-column f-xl">
+                            <div>RealFeel</div>
+                            <span class="bold">{{town.weather.feelslike_c}}C</span>
+                        </div>
+                   </div>
+                </div>
+            </div>
+            <div class="flex gap mt-14">
+                <div class="w-50 flex flex-column">
+                    <div class="flex space-between py-10">
+                        <span class="f-l">Wind KPH</span>
+                        <span class="f-xl bold">{{ town.weather.wind_kph }}</span>
+                    </div>
+                    <div class="flex space-between py-10 border-top">
+                        <span class="f-l">Wind Dir</span>
+                        <span class="f-xl bold">{{town.weather.wind_dir}}</span>
+                    </div>
+                </div>
+                <div class="w-50">
+                    <div class="flex space-between py-10">
+                        <span class="f-l">Humidity</span>
+                        <span class="f-xl bold">{{town.weather.humidity}}%</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+     {% endfor %}
+{% endif %}
+
+</body>
+</html>

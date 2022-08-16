@@ -1,0 +1,7 @@
+<h1>Select a provience:</h1>
+  <select name="provience" id="provienceId">
+    {% for provience in provience_list %}
+      <option value="{{ provience.provienceId }}">{{ provience.name }} </option>
+    {% endfor %}
+  </select>
+  <input value="Send" type="button" onclick="window.location.href= document.getElementById('provienceId').value"/>

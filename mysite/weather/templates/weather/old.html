@@ -1,0 +1,37 @@
+<p style="display: none;" id="provienceWeather">
+   </table>
+   <hr>
+   {% if provience.town_set is not None %}
+   <table style="display: none;">
+     <tr>
+       <th>Town Name:</th>
+       <th>temp</th>
+       <th>feels like</th>
+       <th>condition</th>
+       <th>wind kph</th>
+       <th>wind dir</th>
+       <th>humidity</th>
+     </tr>
+     {% for town in provience.town_set.all %}
+     <tr>
+       <td>{{ town.name }}</td>
+       {% if town.weather is not None %}
+         <td>{{ town.weather.temp_c }} </td>
+         <td>{{ town.weather.feelslike_c }} </td>
+         <td>{{ town.weather.condition_text }} <img src="{{ town.weather.condition_icon }}"/> </td>
+         <td>{{ town.weather.wind_kph }} </td>
+         <td>{{ town.weather.wind_dir }} </td>
+         <td>{{ town.weather.humidity }}% </td>
+       {% else %}
+         <td>-</td>
+         <td>-</td>
+         <td>-</td>
+         <td>-</td>
+         <td>-</td>
+         <td>-</td>
+       {% endif %}
+     </tr>
+     {% endfor %}
+   </table>
+   {% endif %}
+</p>
