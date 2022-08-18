@@ -7,5 +7,5 @@ app_name = 'weather'
 urlpatterns = [
     path('', views.index, name='index'),
     path('provience/', views.provience, name='provience'),
-    path('provience/<int:provienceId>', cache_page(5)(views.result), name='result')
+    path('provience/<int:provienceId>', cache_page(600)(views.result), name='result')
 ]
